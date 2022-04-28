@@ -16,16 +16,10 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, re_path
 
-from django.http import HttpResponse
-
-def home(request):
-    return HttpResponse("Hello, world. You're at the polls index.")
-
-def profile(request):
-    return HttpResponse("This is profile page.")
+from . import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('profile/', profile),
-    re_path(r'^$', home),
+    path('profile/', views.profile),
+    re_path(r'^$', views.home),
 ]
