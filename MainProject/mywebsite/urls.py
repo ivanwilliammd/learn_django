@@ -17,9 +17,11 @@ from django.contrib import admin
 from django.urls import path, re_path
 
 from . import views
+from about import views as about_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('profile/', views.profile),
+    path('about/', about_views.about),
     re_path(r'^$', views.home),
 ]
