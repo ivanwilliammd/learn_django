@@ -1,26 +1,16 @@
-<!-- use {% verbatim %}{% endverbatim %} to debug var-->
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Base Template</title>
+    <title>{{ html_var }}</title>
   </head>
   <body>
-    <h2>I am here at {% verbatim %}{{ html_var }}{% endverbatim %}</h2>
-    {% if num %}
-        <p>Your Lucky Number is {{ num }}</p>
-    {% endif %}
-    {% for some_item in some_list%}
-        {% if some_item|divisibleby:"2" %}
-            <p>Your Item is {{ some_item }}</p>
-        {% endif %}
-    {% endfor %}
-
-    <!-- <a href="/">Home</a>
-    <a href="/profile">Profile</a>
-    <a href="/about">About</a>
-    <a href="/blog">Blog</a> -->
+      <div class="container">
+          {% block content %}
+            Hello THERE !
+          {% endblock content %}
+      </div>
   </body>
 </html>
