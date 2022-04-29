@@ -5,21 +5,24 @@ import random
 # Create your views here.
 def home(request):
     context = {
-                "html_var" : "IvanMD",
+                "title" : "IvanMD",
+                "section" : "Home",
                 "num" : random.randint(1,100),
                 "some_list" : [random.randint(1,10000), random.randint(1,1000), random.randint(1,100000)]
             }
     return render(request, 'home.html', context)
     # return HttpResponse('Hello, World!')
 
-def home2(request):
+def about(request):
     context = {
-                
+                "title" : "IvanMD",
+                "section" : "About",
             }
-    return render(request, 'home2.html', context)
+    return render(request, 'about.html', context)
 
-def home3(request):
+def contact(request):
     context = {
-                
+                "title" : "IvanMD",
+                "section" : "Contact",
             }
-    return render(request, 'home3.html', context)
+    return render(request, 'contact.html', context)
