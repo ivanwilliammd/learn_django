@@ -5,4 +5,10 @@
     {{ block.super }}
     <h1>Restaurant List</h1>
 
+    <ul>
+        {% for restaurant in restaurants %}
+            <li>{{ restaurant.name }} | {{ restaurant.location }} | {{ restaurant.category }} | {{ restaurant.timestamp }} | {{ restaurant.updated }}</li>
+        {% endfor %}
+    </ul>
+
 {% endblock content %}

@@ -4,6 +4,36 @@ from django.views import View
 from django.views.generic import TemplateView
 import random
 
+from .models import RestaurantLocation
+
+# Template View
+class HomeView(TemplateView):
+    template_name = 'home.html'
+    def get_context_data(self, *args, **kwargs):
+        context = super(HomeView, self).get_context_data(*args, **kwargs)
+        print(context)
+        context = {
+            "title" : "IvanMD",
+            "section" : "Home",
+            "num" : random.randint(1,100),
+            "some_list" : [random.randint(1,10000), random.randint(1,1000), random.randint(1,100000)]
+        }
+        return context
+
+
+
+
+# def restaurant_listview
+def restaurant_listview(request):
+    template_name = 'restaurants/restaurant_list.html'
+    queryset = RestaurantLocation.objects.all()
+    context = {
+        "restaurants" : queryset,
+        "title" : 'Restaurants | IvanMD',
+    }
+    return render(request, template_name, context)
+
+
 # # Fucntion based view.
 # def home(request):
 #     context = {
@@ -35,32 +65,9 @@ import random
 #         context = {}
 #         return render(request, 'contact.html', context)
 
-# Template View
-class HomeView(TemplateView):
-    template_name = 'home.html'
-    def get_context_data(self, *args, **kwargs):
-        context = super(HomeView, self).get_context_data(*args, **kwargs)
-        print(context)
-        context = {
-            "title" : "IvanMD",
-            "section" : "Home",
-            "num" : random.randint(1,100),
-            "some_list" : [random.randint(1,10000), random.randint(1,1000), random.randint(1,100000)]
-        }
-        return context
-
-
+# # Template View
 # class AboutView(TemplateView):
 #     template_name = 'about.html'
 
 # class ContactView(TemplateView):
 #     template_name = 'contact.html'
-
-
-# def restaurant_listview
-def restaurant_listview(request):
-    template_name = 'restaurants/restaurant_list.html'
-    context = {
-        "object_list" : [1,2,3,4,5,6,7,8,9,10]
-    }
-    return render(request, template_name, context)
