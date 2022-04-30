@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+    {{ block.super }}
+    <h1>{{ object.name }} <small> - {{ object.category }}</small> </h1> 
+    <p>Location : {{ object.location }}</p>
+    <p>{{ object.timestamp }}, Updated {{ object.updated }}</p>
+
+
+{% endblock content %}
