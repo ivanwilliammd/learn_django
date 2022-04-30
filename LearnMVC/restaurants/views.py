@@ -34,9 +34,7 @@ class HomeView(TemplateView):
 
 
 class RestaurantListView(ListView):
-    queryset = RestaurantLocation.objects.all()
-    
-class SearchRestaurantListView(ListView):
+
     def get_queryset(self):
         print(self.kwargs)
         slug = self.kwargs.get('slug')
@@ -46,7 +44,7 @@ class SearchRestaurantListView(ListView):
                 Q(category__icontains=slug)
                 )
         else :
-            queryset = RestaurantLocation.objects.none()
+            queryset = RestaurantLocation.objects.all()
         return queryset
 
 # # Fucntion based view.
