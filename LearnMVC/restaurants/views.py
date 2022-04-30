@@ -38,7 +38,6 @@ import random
 # Template View
 class HomeView(TemplateView):
     template_name = 'home.html'
-
     def get_context_data(self, *args, **kwargs):
         context = super(HomeView, self).get_context_data(*args, **kwargs)
         print(context)
@@ -51,8 +50,17 @@ class HomeView(TemplateView):
         return context
 
 
-class AboutView(TemplateView):
-    template_name = 'about.html'
+# class AboutView(TemplateView):
+#     template_name = 'about.html'
 
-class ContactView(TemplateView):
-    template_name = 'contact.html'
+# class ContactView(TemplateView):
+#     template_name = 'contact.html'
+
+
+# def restaurant_listview
+def restaurant_listview(request):
+    template_name = 'restaurants/restaurant_list.html'
+    context = {
+        "object_list" : [1,2,3,4,5,6,7,8,9,10]
+    }
+    return render(request, template_name, context)

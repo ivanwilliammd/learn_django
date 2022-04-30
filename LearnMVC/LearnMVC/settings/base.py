@@ -56,7 +56,8 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-            Path(BASE_DIR).joinpath('LearnMVC').joinpath('template')
+            # Path(BASE_DIR).joinpath('LearnMVC').joinpath('restaurants').joinpath('templates'),
+            Path(BASE_DIR).joinpath('LearnMVC').joinpath('template'),
         ],
         'APP_DIRS': True,
         'OPTIONS': {

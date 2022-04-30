@@ -15,15 +15,17 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, re_path
+from django.views.generic import TemplateView
 
-# from restaurants.views import home, about, contact, ContactView, 
-from restaurants.views import HomeView, AboutView, ContactView
+# from restaurants.views import home, about, contact, ContactView, AboutView, ContactView,
+from restaurants.views import HomeView, restaurant_listview
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     re_path(r'^$', HomeView.as_view(), name='home'),
-    path('about/', AboutView.as_view()),
-    path('contact/', ContactView.as_view()),
+    path('restaurants/', restaurant_listview),
+    path('about/', TemplateView.as_view(template_name='about.html')),
+    path('contact/', TemplateView.as_view(template_name='contact.html')),
     # path('contact/', ContactView.as_view()),
     # path('contact/<int:id>/', ContactView.as_view()),
 ]
