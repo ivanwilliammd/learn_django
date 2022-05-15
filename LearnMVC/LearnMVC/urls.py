@@ -30,8 +30,11 @@ from restaurants.views import (
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('accounts/login/', auth_views.LoginView.as_view(), name='login'),
-    path('accounts/logout/', logout_view, name='logout'),
+    # path('accounts/login/', auth_views.LoginView.as_view(), name='login'),
+    # path('accounts/logout/', logout_view, name='logout'),
+
+    path('accounts/', include('django.contrib.auth.urls')),
+
     path('restaurants/', include('restaurants.urls')),
     
     re_path(r'^$', HomeView.as_view(), name='home'),
