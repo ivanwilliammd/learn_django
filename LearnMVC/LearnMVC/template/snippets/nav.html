@@ -1,8 +1,8 @@
 <h3 style="text-align:center">Hello THERE !</h3>
 <div style="text-align: center;">
-    <a href="/">Home</a> 
-    <a href="/about">About</a> 
-    <a href="/contact">Contact</a>
-    <a href="/restaurants">Restaurant List</a>
-    <a href="/restaurants/create">Restaurant Create</a>
+    <a href="{% url 'home' %}">Home</a> 
+    <a href="{% url 'about' %}">About</a> 
+    <a href="{% url 'contact' %}">Contact</a>
+    <a href="{% url 'restaurants' %}">Restaurant List</a>
+    <a href="{% url 'restaurants-create' %}">Restaurant Create</a>
 </div>
