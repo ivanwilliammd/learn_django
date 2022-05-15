@@ -24,39 +24,22 @@ class HomeView(TemplateView):
 
 
 def restaurant_createview(request):
-    if request.method=="POST" :
-        # print('POST DATA')
-        print(request.POST)
-        name = request.POST["name"]
-        location = request.POST["location"]
-        category = request.POST["category"]
+    form = RestaurantCreateForm(request.POST or None)
+    if form.is_valid():
         obj = RestaurantLocation.objects.create(
-                name = name,
-                location = location,
-                category = category
+                name = form.cleaned_data.get('name'),
+                location = form.cleaned_data.get('location'),
+                category = form.cleaned_data.get('category'),
+                # name = name,
+                # location = location,
+                # category = category
             )
         return HttpResponseRedirect("/restaurants")
+    if form.errors():
+        print(form.errors)
     template_name = 'restaurants/forms.html'
-    context = {}
+    context = {"form": form}
     return render(request, template_name, context)
-
-# def restaurant_listview(request):
-#     template_name = 'restaurants/restaurant_list.html'
-#     queryset = RestaurantLocation.objects.all()
-#     context = {
-#         "restaurants" : queryset,
-#         "title" : 'Restaurants | IvanMD',
-#     }
-#     return render(request, template_name, context)
-
-# def restaurant_detailview(request, slug):
-#     template_name = 'restaurants/restaurantlocation_detail.html'
-#     obj = RestaurantLocation.objects.get(slug=slug)
-#     context = {
-#         "object":obj
-#     }
-#     return render(request, template_name, context)
-
 
 class RestaurantListView(ListView):
 
@@ -85,6 +68,25 @@ class RestaurantDetailView(DetailView):
     #     rest_id = self.kwargs.get('rest_id')
     #     obj = get_object_or_404(RestaurantLocation, id=rest_id) #pk = rest_id
     #     return obj
+
+
+
+# def restaurant_listview(request):
+#     template_name = 'restaurants/restaurant_list.html'
+#     queryset = RestaurantLocation.objects.all()
+#     context = {
+#         "restaurants" : queryset,
+#         "title" : 'Restaurants | IvanMD',
+#     }
+#     return render(request, template_name, context)
+
+# def restaurant_detailview(request, slug):
+#     template_name = 'restaurants/restaurantlocation_detail.html'
+#     obj = RestaurantLocation.objects.get(slug=slug)
+#     context = {
+#         "object":obj
+#     }
+#     return render(request, template_name, context)
 
 # # Function based view.
 # def home(request):
