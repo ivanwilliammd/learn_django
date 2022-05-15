@@ -5,7 +5,7 @@ from django.views import View
 from django.views.generic import TemplateView, ListView, DetailView
 import random
 
-from .forms import RestaurantCreateForm
+from .forms import RestaurantCreateForm, RestaurantLocationCreateForm
 from .models import RestaurantLocation
 
 # Template View
@@ -24,17 +24,19 @@ class HomeView(TemplateView):
 
 
 def restaurant_createview(request):
-    form = RestaurantCreateForm(request.POST or None)
+    # form = RestaurantCreateForm(request.POST or None)
+    form = RestaurantLocationCreateForm(request.POST or None)
     errors = None
     if form.is_valid():
-        obj = RestaurantLocation.objects.create(
-                name = form.cleaned_data.get('name'),
-                location = form.cleaned_data.get('location'),
-                category = form.cleaned_data.get('category'),
-                # name = name,
-                # location = location,
-                # category = category
-            )
+        form.save()
+        # obj = RestaurantLocation.objects.create(
+        #         name = form.cleaned_data.get('name'),
+        #         location = form.cleaned_data.get('location'),
+        #         category = form.cleaned_data.get('category'),
+        #         # name = name,
+        #         # location = location,
+        #         # category = category
+        #     )
         return HttpResponseRedirect("/restaurants")
     if form.errors:
         errors = form.errors
