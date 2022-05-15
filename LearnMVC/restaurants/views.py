@@ -22,7 +22,6 @@ class HomeView(TemplateView):
         return context
 
 
-# def restaurant_listview
 # def restaurant_listview(request):
 #     template_name = 'restaurants/restaurant_list.html'
 #     queryset = RestaurantLocation.objects.all()
@@ -32,16 +31,24 @@ class HomeView(TemplateView):
 #     }
 #     return render(request, template_name, context)
 
+# def restaurant_detailview(request, slug):
+#     template_name = 'restaurants/restaurantlocation_detail.html'
+#     obj = RestaurantLocation.objects.get(slug=slug)
+#     context = {
+#         "object":obj
+#     }
+#     return render(request, template_name, context)
+
 
 class RestaurantListView(ListView):
 
     def get_queryset(self):
         print(self.kwargs)
-        slug = self.kwargs.get('slug')
-        if slug:
+        category = self.kwargs.get('category')
+        if category:
             queryset =  RestaurantLocation.objects.filter(
-                Q(category__iexact=slug) |
-                Q(category__icontains=slug)
+                Q(category__iexact=category) |
+                Q(category__icontains=category)
                 )
         else :
             queryset = RestaurantLocation.objects.all()

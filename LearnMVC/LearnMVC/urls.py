@@ -24,7 +24,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     re_path(r'^$', HomeView.as_view(), name='home'),
     path('restaurants/', RestaurantListView.as_view()),
-    # path('restaurants/<slug:slug>/', RestaurantListView.as_view()),
+    path('restaurants/category/<category>/', RestaurantListView.as_view()),
     # path('restaurants/<pk>/', RestaurantDetailView.as_view()),
     # path('restaurants/<rest_id>/', RestaurantDetailView.as_view()),
     re_path(r'^restaurants/(?P<slug>[\w-]+)/$', RestaurantDetailView.as_view()),
