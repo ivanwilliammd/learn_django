@@ -35,7 +35,7 @@ urlpatterns = [
 
     path('accounts/', include('django.contrib.auth.urls')),
 
-    path('restaurants/', include('restaurants.urls')),
+    path('restaurants/', include(('restaurants.urls', 'restaurants'), namespace='restaurants')),
     
     re_path(r'^$', HomeView.as_view(), name='home'),
     path('about/', TemplateView.as_view(template_name='about.html'), name='about'),

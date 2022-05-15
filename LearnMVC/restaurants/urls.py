@@ -12,10 +12,10 @@ from .views import (
 )
 
 urlpatterns = [
-    path('', RestaurantListView.as_view(), name='restaurants'),
-    path('create', RestaurantCreateView.as_view(), name='restaurants-create'),
+    path('', RestaurantListView.as_view(), name='list'),
+    path('create', RestaurantCreateView.as_view(), name='create'),
     path('category/<category>/', RestaurantListView.as_view()),
-    re_path(r'(?P<slug>[\w-]+)/$', RestaurantDetailView.as_view(), name='restaurant-detail'),
+    re_path(r'(?P<slug>[\w-]+)/$', RestaurantDetailView.as_view(), name='detail'),
 
     # path('restaurants/<pk>/', RestaurantDetailView.as_view()),
     # path('restaurants/<rest_id>/', RestaurantDetailView.as_view()),
