@@ -16,6 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, re_path
 from django.views.generic import TemplateView
+from django.contrib.auth import views as auth_views
 
 # from restaurants.views import home, about, contact, ContactView, AboutView, ContactView, restaurant_listview
 from restaurants.views import (
@@ -28,6 +29,10 @@ from restaurants.views import (
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('login/', auth_views.LoginView.as_view(), name='login'),
+    path('password_reset/', auth_views.PasswordResetView.as_view(), name='password_reset'),
+    path('password_reset_confirm/', auth_views.PasswordResetConfirmView.as_view(), name='password_reset_confirm'),
+    path('password_reset_complete/', auth_views.PasswordResetCompleteView.as_view(), name='password_reset_complete'),
     re_path(r'^$', HomeView.as_view(), name='home'),
     path('restaurants/', RestaurantListView.as_view()),
     path('restaurants/create', RestaurantCreateView.as_view()),
