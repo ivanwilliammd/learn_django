@@ -56,12 +56,12 @@ class RestaurantDetailView(DetailView):
     #     print(context)
     #     return context
 
-    def get_object(self, *args, **kwargs):
-        rest_id = self.kwargs.get('rest_id')
-        obj = get_object_or_404(RestaurantLocation, id=rest_id) #pk = rest_id
-        return obj
+    # def get_object(self, *args, **kwargs):
+    #     rest_id = self.kwargs.get('rest_id')
+    #     obj = get_object_or_404(RestaurantLocation, id=rest_id) #pk = rest_id
+    #     return obj
 
-# # Fucntion based view.
+# # Function based view.
 # def home(request):
 #     context = {
 #                 "title" : "IvanMD",
