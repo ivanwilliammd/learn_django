@@ -25,6 +25,7 @@ class HomeView(TemplateView):
 
 def restaurant_createview(request):
     form = RestaurantCreateForm(request.POST or None)
+    errors = None
     if form.is_valid():
         obj = RestaurantLocation.objects.create(
                 name = form.cleaned_data.get('name'),
@@ -35,10 +36,11 @@ def restaurant_createview(request):
                 # category = category
             )
         return HttpResponseRedirect("/restaurants")
-    if form.errors():
-        print(form.errors)
+    if form.errors:
+        errors = form.errors
+
     template_name = 'restaurants/forms.html'
-    context = {"form": form}
+    context = {"form": form, "errors": errors}
     return render(request, template_name, context)
 
 class RestaurantListView(ListView):
