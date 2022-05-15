@@ -7,8 +7,8 @@
     {{ block.super }}
     <h1>Add Restaurant</h1> 
 
-    {% if errors %}
-        {{ errors }}
+    {% if form.errors %}
+        {{ form.errors }}
     {% endif %}
     <form method='POST'>{% csrf_token %}
         <!-- <input type="text" class="text" name="name", placeholder="Name"><br>

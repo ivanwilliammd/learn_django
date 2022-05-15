@@ -76,7 +76,7 @@ class RestaurantDetailView(DetailView):
 class RestaurantCreateView(CreateView):
     form_class = RestaurantLocationCreateForm
     template_name = 'restaurants/forms.html'
-    # success_url = "/restaurants/"
+    success_url = "/restaurants/"
 
 
 
