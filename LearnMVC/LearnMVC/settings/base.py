@@ -51,6 +51,7 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'LearnMVC.urls'
+LOGIN_URL = '/login/'
 
 TEMPLATES = [
     {
