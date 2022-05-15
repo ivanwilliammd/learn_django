@@ -1,6 +1,8 @@
 from unicodedata import category
+from uuid import uuid4
 from django.db import models
 from django.db.models.signals import pre_save, post_save
+from autoslug import AutoSlugField
 
 from .utils import unique_slug_generator
 
@@ -12,7 +14,8 @@ class RestaurantLocation(models.Model):
     timestamp = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     my_date_field = models.DateField(auto_now=True)
-    slug = models.SlugField(null=True, blank=True)
+    # slug = models.SlugField(unique=True)
+    slug = AutoSlugField(populate_from='name')
 
     def __str__(self):
         return self.name + ' - ' + self.location
@@ -26,8 +29,6 @@ def rl_pre_save_receiver(sender, instance, *args, **kwargs):
     # print(instance.timestamp)
     if not instance.slug:
         instance.slug = unique_slug_generator(instance)
-        instance.save()
-
 
 # def rl_post_save_receiver(sender, instance, created, *args, **kwargs):
 #     print('saved')
