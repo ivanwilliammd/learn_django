@@ -24,12 +24,15 @@ from restaurants.views import (
     RestaurantListView, 
     RestaurantDetailView, 
     # restaurant_createview,
-    RestaurantCreateView
+    RestaurantCreateView,
+    logout_view
 )
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('login/', auth_views.LoginView.as_view(), name='login'),
+    path('accounts/login/', auth_views.LoginView.as_view(), name='login'),
+    path('accounts/logout/', logout_view, name='logout'),
+    path('accounts/password-reset/', auth_views.PasswordResetView.as_view(), name='password_reset'),
     re_path(r'^$', HomeView.as_view(), name='home'),
     path('restaurants/', RestaurantListView.as_view(), name='restaurants'),
     path('restaurants/create', RestaurantCreateView.as_view(), name='restaurants-create'),

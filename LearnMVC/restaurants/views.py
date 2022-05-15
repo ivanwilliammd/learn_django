@@ -1,4 +1,4 @@
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Q
 from django.http import HttpResponse, HttpResponseRedirect
@@ -9,6 +9,14 @@ import random
 
 from .forms import RestaurantCreateForm, RestaurantLocationCreateForm
 from .models import RestaurantLocation
+from django.contrib.auth import logout
+
+
+@login_required
+# Logout Request
+def logout_view(request):
+    logout(request)
+    return HttpResponseRedirect("/")
 
 # Template View
 class HomeView(TemplateView):
@@ -24,7 +32,7 @@ class HomeView(TemplateView):
         }
         return context
 
-# @login_required(login_url='/login/')
+# @login_required
 def restaurant_createview(request):
     # form = RestaurantCreateForm(request.POST or None)
     form = RestaurantLocationCreateForm(request.POST or None)
