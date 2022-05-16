@@ -19,6 +19,11 @@ class ItemDetailView(DetailView):
 
 class ItemCreateView(CreateView):
     template_name = 'forms.html'
+
+    def get_form_kwargs(self):
+        kwargs = super(ItemCreateView, self).get_form_kwargs()
+        return super().get_form_kwargs()
+
     def get_queryset(self):
         return Item.objects.filter(user=self.request.user)
 
