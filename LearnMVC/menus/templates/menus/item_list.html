@@ -10,13 +10,13 @@
     <ul>
         {% for obj in object_list %}
             <li>
-                <a href="#" class="href">{{ obj.name }}</a><br><br>
+                <a href="{{ obj.get_absolute_url }}" class="href">{{ obj.name }}</a><br><br>
                 {% if obj.contents %}
                     Contents
                     <ul>
                         {% for item in obj.get_contents %}
                             <li>
-                                <a href="#" class="href">{{ item }}</a>
+                                {{ item }}
                             </li>
                         {% endfor %}
                     </ul>
@@ -28,7 +28,7 @@
                     <ul>
                         {% for item in obj.get_excludes %}
                             <li>
-                                <a href="#" class="href">{{ item }}</a>
+                                {{ item }}
                             </li>
                         {% endfor %}
                     </ul>

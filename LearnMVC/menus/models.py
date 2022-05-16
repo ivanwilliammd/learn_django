@@ -1,5 +1,7 @@
 from django.conf import settings
 from django.db import models
+from django.urls import reverse
+
 
 from restaurants.models import RestaurantLocation
 # Create your models here.
@@ -24,6 +26,9 @@ class Item(models.Model):
 
     def __str__(self):
         return self.name
+
+    def get_absolute_url(self):
+        return reverse('menus:detail', kwargs={'pk': self.pk})
     
     def get_contents(self):
         return self.contents.split(",")
