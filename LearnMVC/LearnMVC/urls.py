@@ -21,11 +21,11 @@ from django.contrib.auth import views as auth_views
 # from restaurants.views import home, about, contact, ContactView, AboutView, ContactView, restaurant_listview
 from restaurants.views import (
     HomeView, 
-    RestaurantListView, 
-    RestaurantDetailView, 
+    # RestaurantListView, 
+    # RestaurantDetailView, 
     # restaurant_createview,
-    RestaurantCreateView,
-    logout_view
+    # RestaurantCreateView,
+    # logout_view
 )
 
 urlpatterns = [
@@ -36,6 +36,7 @@ urlpatterns = [
     path('accounts/', include('django.contrib.auth.urls')),
 
     path('restaurants/', include(('restaurants.urls', 'restaurants'), namespace='restaurants')),
+    path('items/', include(('menus.urls', 'menus'), namespace='menus')),
     
     re_path(r'^$', HomeView.as_view(), name='home'),
     path('about/', TemplateView.as_view(template_name='about.html'), name='about'),

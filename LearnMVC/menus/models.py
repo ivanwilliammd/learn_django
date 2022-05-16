@@ -21,3 +21,12 @@ class Item(models.Model):
     
     class Meta : # Sorting on descending for -
         ordering = ['-updated', '-timestamp']
+
+    def __str__(self):
+        return self.name
+    
+    def get_contents(self):
+        return self.contents.split(",")
+
+    def get_excludes(self):
+        return self.excludes.split(",")
