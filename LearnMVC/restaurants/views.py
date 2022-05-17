@@ -12,11 +12,11 @@ from .models import RestaurantLocation
 from django.contrib.auth import logout
 
 
-@login_required
-# Logout Request
-def logout_view(request):
-    logout(request)
-    return HttpResponseRedirect("/")
+# @login_required
+# # Logout Request
+# def logout_view(request):
+#     logout(request)
+#     return HttpResponseRedirect("/")
 
 # Template View
 class HomeView(TemplateView):
@@ -33,31 +33,31 @@ class HomeView(TemplateView):
         return context
 
 # @login_required
-def restaurant_createview(request):
-    # form = RestaurantCreateForm(request.POST or None)
-    form = RestaurantLocationCreateForm(request.POST or None)
-    errors = None
-    if form.is_valid() and request.user.is_authenticated():
-        instance = form.save(commit=False)
-        instance.owner = request.user
-        instance.save()
-        # obj = RestaurantLocation.objects.create(
-        #         name = form.cleaned_data.get('name'),
-        #         location = form.cleaned_data.get('location'),
-        #         category = form.cleaned_data.get('category'),
-        #         # name = name,
-        #         # location = location,
-        #         # category = category
-        #     )
-        return HttpResponseRedirect("/restaurants")
-    if form.errors:
-        errors = form.errors
+# def restaurant_createview(request):
+#     # form = RestaurantCreateForm(request.POST or None)
+#     form = RestaurantLocationCreateForm(request.POST or None)
+#     errors = None
+#     if form.is_valid() and request.user.is_authenticated():
+#         instance = form.save(commit=False)
+#         instance.owner = request.user
+#         instance.save()
+#         # obj = RestaurantLocation.objects.create(
+#         #         name = form.cleaned_data.get('name'),
+#         #         location = form.cleaned_data.get('location'),
+#         #         category = form.cleaned_data.get('category'),
+#         #         # name = name,
+#         #         # location = location,
+#         #         # category = category
+#         #     )
+#         return HttpResponseRedirect("/restaurants")
+#     if form.errors:
+#         errors = form.errors
 
-    template_name = 'restaurants/forms.html'
-    context = {"form": form, "errors": errors}
-    return render(request, template_name, context)
+#     template_name = 'restaurants/forms.html'
+#     context = {"form": form, "errors": errors}
+#     return render(request, template_name, context)
 
-class RestaurantListView(ListView):
+class RestaurantListView(LoginRequiredMixin, ListView):
 
     def get_queryset(self):
         print(self.kwargs)
@@ -71,7 +71,7 @@ class RestaurantListView(ListView):
             queryset = RestaurantLocation.objects.all()
         return queryset
 
-class RestaurantDetailView(DetailView):
+class RestaurantDetailView(LoginRequiredMixin, DetailView):
     queryset = RestaurantLocation.objects.all()
 
     # def get_context_data(self, *args, **kwargs):

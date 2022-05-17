@@ -1,23 +1,24 @@
 from django.shortcuts import render
 from django.views.generic import ListView, DetailView, CreateView, UpdateView
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 from .forms import ItemForm
 from .models import Item
 # Create your views here.
 
 
-class ItemListView(ListView):
+class ItemListView(LoginRequiredMixin, ListView):
 
     def get_queryset(self):
         return Item.objects.filter(user=self.request.user)
 
 
-class ItemDetailView(DetailView):
+class ItemDetailView(LoginRequiredMixin, DetailView):
 
     def get_queryset(self):
         return Item.objects.filter(user=self.request.user)
 
-class ItemCreateView(CreateView):
+class ItemCreateView(LoginRequiredMixin, CreateView):
     template_name = 'forms.html'
 
     def get_form_kwargs(self):
@@ -41,7 +42,7 @@ class ItemCreateView(CreateView):
         context['title'] = 'Add Item'
         return context
 
-class ItemUpdateView(UpdateView):
+class ItemUpdateView(LoginRequiredMixin, UpdateView):
     template_name = 'forms.html'
 
 
