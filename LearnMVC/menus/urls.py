@@ -14,6 +14,7 @@ urlpatterns = [
     path('', ItemListView.as_view(), name='list'),
     path('create', ItemCreateView.as_view(), name='create'),
     re_path(r'(?P<pk>[\w-]+)/$', ItemDetailView.as_view(), name='detail'),
+    re_path(r'(?P<pk>[\w-]+)/update$', ItemUpdateView.as_view(), name='update'),
 
     # path('restaurants/<pk>/', RestaurantDetailView.as_view()),
     # path('restaurants/<rest_id>/', RestaurantDetailView.as_view()),

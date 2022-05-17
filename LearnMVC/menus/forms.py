@@ -19,4 +19,4 @@ class ItemForm(forms.ModelForm):
         # print(user)
         # print(kwargs)
         super(ItemForm, self).__init__(*args, **kwargs)
-        self.fields["restaurant"].queryset = RestaurantLocation.objects.filter(owner=user, item__isnull=True) #.exclude(item__isnull=False)
+        self.fields["restaurant"].queryset = RestaurantLocation.objects.filter(owner=user) #, item__isnull=True) #.exclude(item__isnull=False)
