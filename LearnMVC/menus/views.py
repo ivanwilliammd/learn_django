@@ -44,6 +44,7 @@ class ItemCreateView(LoginRequiredMixin, CreateView):
 
 class ItemUpdateView(LoginRequiredMixin, UpdateView):
     template_name = 'forms.html'
+    form_class = ItemForm
 
 
     def get_form_kwargs(self):
@@ -55,7 +56,6 @@ class ItemUpdateView(LoginRequiredMixin, UpdateView):
     def get_queryset(self):
         return Item.objects.filter(user=self.request.user)
 
-    form_class = ItemForm
 
     def form_valid(self, form):
         instance = form.save(commit=False)
