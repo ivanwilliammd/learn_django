@@ -44,6 +44,13 @@ class ItemCreateView(CreateView):
 class ItemUpdateView(UpdateView):
     template_name = 'forms.html'
 
+
+    def get_form_kwargs(self):
+        kwargs = super(ItemUpdateView, self).get_form_kwargs()
+        kwargs['user'] = self.request.user
+        # kwargs['instance'] = Item.objects.filter(user = self.request.user).first()
+        return kwargs
+
     def get_queryset(self):
         return Item.objects.filter(user=self.request.user)
 
