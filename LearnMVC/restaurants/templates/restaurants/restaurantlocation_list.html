@@ -6,6 +6,7 @@
 
     {{ block.super }}
     <h1>Restaurant List</h1>
+    <a href="{% url 'restaurants:create' %}">Add Restaurants</a><br><hr>
 
     <ul>
         {% for obj in object_list %}
