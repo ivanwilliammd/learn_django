@@ -102,9 +102,9 @@ class RestaurantCreateView(LoginRequiredMixin, CreateView):
         return context
 
 class RestaurantUpdateView(LoginRequiredMixin, UpdateView):
-    template_name = 'forms.html'
     form_class = RestaurantLocationCreateForm
-    
+    template_name = 'restaurants/detail-update.html'
+
     def get_queryset(self):
         return RestaurantLocation.objects.filter(owner=self.request.user)
 

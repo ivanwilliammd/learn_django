@@ -7,16 +7,7 @@
     {{ block.super }}
     <h1>{{ title }}</h1> 
 
-    {% if form.errors.non_field_errors %}
-        {{ form.errors.non_field_errors }}
-    {% endif %}
-    <form method='POST'>{% csrf_token %}
-        <!-- <input type="text" class="text" name="name", placeholder="Name"><br>
-        <input type="text" class="text" name="location", placeholder="Location"><br>
-        <input type="text" class="text" name="category", placeholder="Category"><br> -->
-        {{ form.as_p }}
-        <button type="submit" class="submit">Submit</button>
-    </form>
+    {% include 'snippets/form-snippet.html' %}
 
 
 {% endblock content %}
