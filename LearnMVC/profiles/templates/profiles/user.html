@@ -7,7 +7,11 @@
     {{ block.super }}
     <h1>{{ user.username }}</h1> 
     <hr>
-    {{ user.restaurantlocation_set.all }}
-
-
+    <!-- {{ user.restaurantlocation_set.all }} -->
+    {% for restaurants in user.restaurantlocation_set.all %}
+        <li>{{ restaurants.title }} - {{ restaurants.location }}</li>
+        <ul>
+            <li>{{ restaurants.item_set.all }}</li>
+        </ul>
+    {% endfor %} 
 {% endblock content %}
