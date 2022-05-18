@@ -37,6 +37,7 @@ urlpatterns = [
 
     path('restaurants/', include(('restaurants.urls', 'restaurants'), namespace='restaurants')),
     path('items/', include(('menus.urls', 'menus'), namespace='menus')),
+    path('u/', include(('profiles.urls', 'profile'), namespace='profile')),
     
     re_path(r'^$', HomeView.as_view(), name='home'),
     path('about/', TemplateView.as_view(template_name='about.html'), name='about'),
