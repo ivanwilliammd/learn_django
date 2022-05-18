@@ -12,21 +12,31 @@
     <!-- Only if item available -->
     {% if user.item_set.all.exists %} 
         {% for restaurants in user.restaurantlocation_set.all %}
-            <li><b>{{ restaurants.title }}</b> - {{ restaurants.location }} | {{ restaurants.category }}</li>
-            <b>Menus : </b>
-            <ol>
-                <!-- <li>{{ restaurants.item_set.all }}</li> -->
-                {% for items in restaurants.item_set.all %}
-                    <li style="margin-bottom : 15px">{{ items.name }} - {{ items.get_excludes }}<br>
-                        Ingredient : {% for ingredient in items.get_contents %}
-                            <span style="padding: 2px 4px; margin-right:4px; background-color:lightgray">{{ ingredient }}, </span>
-                        {% endfor %}<br>
-                        No : {% for exclude in items.get_excludes %}
-                            <span style="padding: 2px 4px; margin-right:4px; background-color:lightgoldenrodyellow">{{ exclude }}, </span>
-                        {% endfor %}
-                    </li>
-                {% endfor %}
-            </ol>
+            <div class="row">
+
+                <div class="col-sm-12">
+                    <div class="card">
+                    <b>{{ restaurants.title }}</b> - {{ restaurants.location }} | {{ restaurants.category }}
+                    <b>Menus : </b>
+                        <ol>
+                            <!-- <li>{{ restaurants.item_set.all }}</li> -->
+                            {% for items in restaurants.item_set.all %}
+                                <li style="margin-bottom : 15px"><b>{{ items.name }}</b><br>
+                                    Ingredient : {{ items.contents }}
+                                    <!-- {% for ingredient in items.get_contents %}
+                                        <span class="badge badge-default">{{ ingredient }}, </span>
+                                    {% endfor %} -->
+                                    <br>
+                                    Exclude : {{ items.excludes }}
+                                    <!-- {% for exclude in items.get_excludes %}
+                                        <span class="badge badge-danger">{{ exclude }}, </span>
+                                    {% endfor %} -->
+                                </li>
+                            {% endfor %}
+                        </ol>
+                    </div>
+                </div>
+            </div>
         {% endfor %} 
     {% else %}
         <p class="lead">No item available</p>
