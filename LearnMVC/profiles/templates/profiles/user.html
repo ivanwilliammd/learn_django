@@ -11,7 +11,7 @@
 
     <!-- Only if item available -->
     {% if user.item_set.all.exists %} 
-        {% for restaurants in user.restaurantlocation_set.all %}
+        {% for restaurants in locations %}
             <div class="row">
 
                 <div class="col-sm-12">
