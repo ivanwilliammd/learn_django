@@ -8,8 +8,8 @@ User = settings.AUTH_USER_MODEL
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE) # user.profile
-    followers = models.ManyToManyField(User, related_name='followers', blank=True) # user.followers.all()
-    following = models.ManyToManyField(User, related_name='following', blank=True) # user.following.all()
+    followers = models.ManyToManyField(User, related_name='is_following', blank=True) # user.followers.all()
+    # following = models.ManyToManyField(User, related_name='following', blank=True) # user.following.all()
     
     activated = models.BooleanField(default=False)
     activation_key = models.CharField(max_length=120, blank=True, null=True)
