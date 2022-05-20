@@ -19,16 +19,17 @@ from django.views.generic import TemplateView
 from django.contrib.auth import views as auth_views
 
 from profiles.views import ProfileFollowToggle
+from menus.views import HomeView
 
 # from restaurants.views import home, about, contact, ContactView, AboutView, ContactView, restaurant_listview
-from restaurants.views import (
-    HomeView, 
+# from restaurants.views import (
+    # HomeView, 
     # RestaurantListView, 
     # RestaurantDetailView, 
     # restaurant_createview,
     # RestaurantCreateView,
     # logout_view
-)
+# )
 
 urlpatterns = [
     path('admin/', admin.site.urls),
