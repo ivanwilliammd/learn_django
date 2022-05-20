@@ -16,20 +16,18 @@ User = get_user_model()
 
 class ProfileFollowToggle(LoginRequiredMixin, View):
     def post(self, request, *args, **kwargs):
-        # username_to_toggle = request.POST.get("username")
-        # profile_, is_following = Profile.objects.toggle_follow(request.user, username_to_toggle)
-        # return JsonResponse({"is_following": is_following})
-        print(request.POST)
+        # print(request.POST)
         user_to_toggle = request.POST.get("username")
-        # print(user_to_toggle)
-        profile_ = Profile.objects.get(user__username__iexact=user_to_toggle)
-        user = request.user
-        if user in profile_.followers.all():
-            profile_.followers.remove(user)
-        else:
-            profile_.followers.add(user)
+        profile_, is_following = Profile.objects.toggle_follow(request.user, user_to_toggle)
+
+        # profile_ = Profile.objects.get(user__username__iexact=user_to_toggle)
+        # user = request.user
+        # if user in profile_.followers.all():
+        #     profile_.followers.remove(user)
+        # else:
+        #     profile_.followers.add(user)
+
         return redirect(f"/u/{profile_.user.username}/")
-        # return redirect("/u/admin/")
 
 class ProfileDetailView(LoginRequiredMixin, DetailView):
     # queryset = User.objects.filter(is_active=True)
