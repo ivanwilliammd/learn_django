@@ -10,32 +10,33 @@
 
     <ol>
         {% for obj in object_list %}
-            <li>
-                <a href="{{ obj.get_absolute_url }}" class="href">{{ obj.name }}</a><br>
+            <div class="row">
 
-                {% if obj.contents %}
-                    Contents
-                    <ul>
-                        {% for item in obj.get_contents %}
-                            <li>
-                                {{ item }}
+                <div class="col-sm-12">
+                    <div class="card">
+                    <h3>{{ obj.user.username }}</h3>
+                    <h4>{{ obj.name }}</h4>
+                    <p>{{ obj.restaurant.title }} | {{ obj.restaurant.location }} | {{ obj.restaurant.category }}</p>
+                    <b>Menus : </b>
+                        <ul>
+                            <li style="margin-bottom : 15px">
+                                Ingredient : 
+                                <!-- {{ items.contents }} -->
+                                {% for ingredient in obj.get_contents %}
+                                    <a href="{{ request.path }}?q={{ ingredient }}">{{ ingredient }}</a>, 
+                                {% endfor %}
                             </li>
-                        {% endfor %}
-                    </ul>
-                {% endif %}
-
-                {% if obj.excludes %}
-
-                    Excludes
-                    <ul>
-                        {% for item in obj.get_excludes %}
                             <li>
-                                {{ item }}
+                                Exclude : 
+                                <!-- {{ items.excludes }} -->
+                                {% for exclude in obj.get_excludes %}
+                                    <a href="{{ request.path }}?q={{ exclude }}">{{ exclude }}</a>, 
+                                {% endfor %}
                             </li>
-                        {% endfor %}
-                    </ul>
-                {% endif %}
-            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
             <br>
         {% endfor %}
     </ol>
