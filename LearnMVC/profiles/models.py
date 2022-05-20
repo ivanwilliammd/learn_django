@@ -22,7 +22,10 @@ class Profile(models.Model):
 def post_save_user_receiver(sender, instance, created, *args, **kwargs):
     if created:
         profile, is_created = Profile.objects.get_or_create(user=instance)
-        # celery + redis
-        # send email
+        default_user_profile = Profile.objects.get(user__username="admin")
+        default_user_profile.followers.add(instance) # New user always following the first user
+        # default_user_profile.followers.remove(instance)
+        # default_user_profile.save()
+
 
 post_save.connect(post_save_user_receiver, sender=User)
