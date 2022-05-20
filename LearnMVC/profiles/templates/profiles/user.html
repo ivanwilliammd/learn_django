@@ -6,6 +6,7 @@
 
     {{ block.super }}
     <h1>{{ user.username }}</h1> 
+    <p>{% include 'profiles/snippet/follow_form.html' with username=user.username %}</p>
     <form action="." class="form" method='GET'>
         <input type="text" placeholder="Search....." name="q" value="{{ request.GET.q }}">
         <button type="submit" class="btn btn-primary">Search</button>

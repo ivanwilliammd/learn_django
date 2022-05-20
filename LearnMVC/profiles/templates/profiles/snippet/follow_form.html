@@ -1,0 +1,8 @@
+<form class="form" action="{% url 'follow' %}" method="POST">
+    {% csrf_token %}
+    <input type="hidden" name="user" 
+        value="{% if username %}{{ username }}
+        {% else %}ivanwilliammd
+        {% endif %}">
+    <button class="btn btn-primary">Follow</button>
+</form>

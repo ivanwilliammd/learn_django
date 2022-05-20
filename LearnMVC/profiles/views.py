@@ -2,8 +2,8 @@ from cProfile import Profile
 from re import U
 from django.contrib.auth import get_user_model
 from django.http import Http404
-from django.shortcuts import get_object_or_404, render
-from django.views.generic import ListView, DetailView, CreateView, UpdateView
+from django.shortcuts import get_object_or_404, redirect
+from django.views.generic import View, DetailView
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 from menus.models import Item
@@ -11,6 +11,14 @@ from restaurants.models import RestaurantLocation
 # Create your views here.
 
 User = get_user_model()
+
+class ProfileFollowToggle(View):
+    def post(self, request, *args, **kwargs):
+        # username_to_toggle = request.POST.get("username")
+        # profile_, is_following = Profile.objects.toggle_follow(request.user, username_to_toggle)
+        # return JsonResponse({"is_following": is_following})
+        print(request.POST)
+        return redirect("/u/admin/")
 
 class ProfileDetailView(DetailView):
     # queryset = User.objects.filter(is_active=True)
