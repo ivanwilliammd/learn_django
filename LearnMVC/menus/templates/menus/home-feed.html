@@ -1,43 +1,39 @@
 {% extends "base.html" %}
 
-{% block head_title %}Menu Items{% endblock head_title %}
+{% block head_title %}User Following Feed{% endblock head_title %}
 
 {% block content %}
 
     {{ block.super }}
-    <h1>Menu List</h1>
+    <h1>User Following Feed</h1>
     <a href="{% url 'menus:create' %}">Add Menu Item</a><br><hr>
 
     <ol>
         {% for obj in object_list %}
             <div class="row">
 
-                <div class="col-sm-12">
+                <div class="col-sm-6 text-center col-sm-offset-3">
                     <div class="card">
-                    <h3><a href="{% url 'profile:detail' username=obj.user.username %}">{{ obj.user.username }}</a></h3>
-                    <h4>{{ obj.name }}</h4>
-                    <p>
-                        <a href="{% url 'profile:detail' username=obj.user.username %}?q={{ obj.restaurant.title }}">{{ obj.restaurant.title }}</a> |
-                        <a href="{% url 'profile:detail' username=obj.user.username %}?q={{ obj.restaurant.location }}">{{ obj.restaurant.location }}</a> |
-                        <a href="{% url 'profile:detail' username=obj.user.username %}?q={{ obj.restaurant.category }}">{{ obj.restaurant.category }}</a>
-                    </p>
-                    <b>Menus : </b>
-                        <ul>
-                            <li style="margin-bottom : 15px">
-                                Ingredient : 
-                                <!-- {{ items.contents }} -->
-                                {% for ingredient in obj.get_contents %}
-                                    <a href="{{ request.path }}?q={{ ingredient }}">{{ ingredient }}</a>, 
-                                {% endfor %}
-                            </li>
-                            <li>
-                                Exclude : 
-                                <!-- {{ items.excludes }} -->
-                                {% for exclude in obj.get_excludes %}
-                                    <a href="{{ request.path }}?q={{ exclude }}">{{ exclude }}</a>, 
-                                {% endfor %}
-                            </li>
-                        </ul>
+                        <h3><a href="{% url 'profile:detail' username=obj.user.username %}">{{ obj.user.username }}</a></h3>
+                        <h4>{{ obj.name }}</h4>
+                        <p>
+                            <a href="{% url 'profile:detail' username=obj.user.username %}?q={{ obj.restaurant.title }}">{{ obj.restaurant.title }}</a> |
+                            <a href="{% url 'profile:detail' username=obj.user.username %}?q={{ obj.restaurant.location }}">{{ obj.restaurant.location }}</a> |
+                            <a href="{% url 'profile:detail' username=obj.user.username %}?q={{ obj.restaurant.category }}">{{ obj.restaurant.category }}</a>
+                        </p>
+                        <b>Menus : </b>
+
+                            <p><b>Contains</b> {{ obj.get_contents|length }} ingredient(s) : 
+                            {% for ingredient in obj.get_contents %}
+                                <a href="{% url 'profile:detail' username=obj.user.username %}?q={{ ingredient }}">{{ ingredient }}</a>, 
+                            {% endfor %}<br>
+
+                            <b>Exclude</b> {{ obj.get_excludes|length }} ingredient(s) :
+                            <!-- {{ items.excludes }} -->
+                            {% for exclude in obj.get_excludes %}
+                                <a href="{% url 'profile:detail' username=obj.user.username %}?q={{ exclude }}">{{ exclude }}</a>, 
+                            {% endfor %}</p>
+
                     </div>
                 </div>
             </div>
