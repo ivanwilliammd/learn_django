@@ -107,6 +107,7 @@ class RestaurantUpdateView(LoginRequiredMixin, UpdateView):
 
     def get_queryset(self):
         return RestaurantLocation.objects.filter(owner=self.request.user)
+        # return RestaurantLocation.objects.all()
 
     def form_valid(self, form):
         instance = form.save(commit=False)
