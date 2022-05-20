@@ -26,6 +26,8 @@ def post_save_user_receiver(sender, instance, created, *args, **kwargs):
         default_user_profile.followers.add(instance) # New user always following the first user
         # default_user_profile.followers.remove(instance)
         # default_user_profile.save()
+        profile.followers.add(default_user_profile.user)
+        profile.followers.add(2)
 
 
 post_save.connect(post_save_user_receiver, sender=User)
