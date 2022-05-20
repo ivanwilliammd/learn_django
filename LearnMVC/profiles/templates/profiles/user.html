@@ -21,21 +21,25 @@
 
                 <div class="col-sm-12">
                     <div class="card">
-                    <b>{{ restaurants.title }}</b> - {{ restaurants.location }} | {{ restaurants.category }}
+                    <b>{{ restaurants.title }}</b>
+                    <p><a href="{{ request.path }}?q={{ restaurants.location }}">{{ restaurants.location }}</a> | 
+                        <a href="{{ request.path }}?q={{ restaurants.category }}">{{ restaurants.category }}</a></p>
                     <b>Menus : </b>
                         <ol>
                             <!-- <li>{{ restaurants.item_set.all }}</li> -->
                             {% for items in restaurants.item_set.all %}
                                 <li style="margin-bottom : 15px"><b>{{ items.name }}</b><br>
-                                    Ingredient : {{ items.contents }}
-                                    <!-- {% for ingredient in items.get_contents %}
-                                        <span class="badge badge-default">{{ ingredient }}, </span>
-                                    {% endfor %} -->
+                                    Ingredient : 
+                                    <!-- {{ items.contents }} -->
+                                    {% for ingredient in items.get_contents %}
+                                        <a href="{{ request.path }}?q={{ ingredient }}">{{ ingredient }}</a>, 
+                                    {% endfor %}
                                     <br>
-                                    Exclude : {{ items.excludes }}
-                                    <!-- {% for exclude in items.get_excludes %}
-                                        <span class="badge badge-danger">{{ exclude }}, </span>
-                                    {% endfor %} -->
+                                    Exclude : 
+                                    <!-- {{ items.excludes }} -->
+                                    {% for exclude in items.get_excludes %}
+                                        <a href="{{ request.path }}?q={{ exclude }}">{{ exclude }}</a>, 
+                                    {% endfor %}
                                 </li>
                             {% endfor %}
                         </ol>
