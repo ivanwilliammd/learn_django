@@ -3,6 +3,7 @@ from django.db import models
 from django.db.models.signals import pre_save, post_save
 from autoslug import AutoSlugField
 from django.urls import reverse
+from django.db.models import Q
 
 from .utils import unique_slug_generator
 from .validators import validate_category
@@ -10,6 +11,30 @@ from .validators import validate_category
 
 from django.conf import settings
 User = settings.AUTH_USER_MODEL
+
+class RestaurantLocationQuerySet(models.query.QuerySet):
+    def search(self, query):
+        if query:
+            query = query.strip()
+            return self.filter(
+                Q(name__icontains=query)|
+                Q(location__icontains=query)|
+                Q(category__icontains=query)|
+                Q(item__name__icontains=query)|
+                Q(item__contents__icontains=query)|
+                Q(item__excludes__icontains=query)
+                ).distinct()
+        return self
+
+class RestaurantLocationManager(models.Manager):
+    def get_queryset(self):
+        return RestaurantLocationQuerySet(self.model, using=self._db)
+
+    def search(self, query):
+        # if query:
+        #     return self.get_queryset().filter(name__icontains=query)
+        return self.get_queryset()
+
 
 # Create your models here.
 class RestaurantLocation(models.Model):
@@ -22,6 +47,8 @@ class RestaurantLocation(models.Model):
     my_date_field = models.DateField(auto_now=True)
     slug = models.SlugField(null=True, blank=True)
     # slug = AutoSlugField(populate_from='name')
+
+    objects = RestaurantLocationManager() # add Model.objects.all()
 
     def __str__(self):
         return self.name + ' - ' + self.location
