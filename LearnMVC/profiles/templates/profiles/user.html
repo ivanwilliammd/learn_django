@@ -9,9 +9,8 @@
     <!-- {{ request.user.is_following.all }} -->
     {% if user.profile in request.user.is_following.all %}
         Is Following
-    {% else %}
-        <p>{% include 'profiles/snippet/follow_form.html' with username=user.username %}</p>
     {% endif %}
+        <p>{% include 'profiles/snippet/follow_form.html' with username=user.username %}</p>
     <form action="." class="form" method='GET'>
         <input type="text" placeholder="Search....." name="q" value="{{ request.GET.q }}">
         <button type="submit" class="btn btn-primary">Search</button>
