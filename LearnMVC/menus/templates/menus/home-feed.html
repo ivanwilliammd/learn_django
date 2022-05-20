@@ -14,7 +14,7 @@
 
                 <div class="col-sm-12">
                     <div class="card">
-                    <h3>{{ obj.user.username }}</h3>
+                    <h3><a href="{% url 'profile:detail' username=obj.user.username %}">{{ obj.user.username }}</a></h3>
                     <h4>{{ obj.name }}</h4>
                     <p>{{ obj.restaurant.title }} | {{ obj.restaurant.location }} | {{ obj.restaurant.category }}</p>
                     <b>Menus : </b>
