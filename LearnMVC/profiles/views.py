@@ -6,7 +6,7 @@ from django.shortcuts import get_object_or_404, render
 from django.views.generic import ListView, DetailView, CreateView, UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 
-
+from menus.models import Item
 from restaurants.models import RestaurantLocation
 # Create your views here.
 
@@ -24,8 +24,11 @@ class ProfileDetailView(DetailView):
 
     def get_context_data(self, *args, **kwargs) :
         context = super(ProfileDetailView, self).get_context_data(*args, **kwargs)
+
+        user = context['user']
+        item_exists = Item.objects.filter(user=user).exists()
         qs = RestaurantLocation.objects.filter(owner=self.get_object())
         
-        if qs.exists():
+        if item_exists and qs.exists():
             context['locations'] = qs
         return context
