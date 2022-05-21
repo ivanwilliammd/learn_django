@@ -18,7 +18,7 @@ from django.urls import path, re_path, include
 from django.views.generic import TemplateView
 from django.contrib.auth import views as auth_views
 
-from profiles.views import ProfileFollowToggle
+from profiles.views import ProfileFollowToggle, RegisterView
 from menus.views import HomeView
 
 # from restaurants.views import home, about, contact, ContactView, AboutView, ContactView, restaurant_listview
@@ -38,9 +38,12 @@ urlpatterns = [
 
     path('accounts/', include('django.contrib.auth.urls')),
     path('profile-follow/', ProfileFollowToggle.as_view(), name='follow'),
+    path('profile-register/', RegisterView.as_view(), name='register'),
+
 
     path('restaurants/', include(('restaurants.urls', 'restaurants'), namespace='restaurants')),
     path('items/', include(('menus.urls', 'menus'), namespace='menus')),
+
     path('u/', include(('profiles.urls', 'profile'), namespace='profile')),
     
     re_path(r'^$', HomeView.as_view(), name='home'),
