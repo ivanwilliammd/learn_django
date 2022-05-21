@@ -17,6 +17,13 @@ class RegisterForm(forms.ModelForm):
         model = User
         fields = ('username', 'email',)
 
+    def clean_email(self):
+        email = self.cleaned_data.get('email')
+        qs = User.objects.filter(email__iexact=email)
+        if qs.exists():
+            raise forms.ValidationError("email is taken")
+        return email
+
     def clean_password2(self):
         # Check that the two password entries match
         password1 = self.cleaned_data.get("password1")
@@ -34,4 +41,6 @@ class RegisterForm(forms.ModelForm):
 
         if commit:
             user.save()
+            # print(user.profile)
+            user.profile.send_activation_email() #celery to delay
         return user

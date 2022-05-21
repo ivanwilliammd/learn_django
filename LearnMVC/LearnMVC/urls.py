@@ -38,7 +38,7 @@ urlpatterns = [
 
     path('accounts/', include('django.contrib.auth.urls')),
     path('profile-follow/', ProfileFollowToggle.as_view(), name='follow'),
-    path('profile-register/', RegisterView.as_view(), name='register'),
+    path('register/', RegisterView.as_view(), name='register'),
 
 
     path('restaurants/', include(('restaurants.urls', 'restaurants'), namespace='restaurants')),
