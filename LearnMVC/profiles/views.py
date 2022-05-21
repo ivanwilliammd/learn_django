@@ -19,6 +19,12 @@ class RegisterView(CreateView):
     template_name = 'registration/register.html'
     success_url = '/'
 
+    def dispatch(self, *args, **kwargs) :
+        if self.request.user.is_authenticated:
+            return redirect('logout')
+        return super(RegisterView, self).dispatch(*args, **kwargs)
+
+
 class ProfileFollowToggle(LoginRequiredMixin, View):
     def post(self, request, *args, **kwargs):
         # print(request.POST)
